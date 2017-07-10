@@ -33,7 +33,6 @@
     <xsl:param name="prefix"/>
     <xsl:param name="suffix"/>
 
-
     <xsl:variable name="value" select="normalize-space(.)"/>
     <xsl:if test="$value">
       <field>
