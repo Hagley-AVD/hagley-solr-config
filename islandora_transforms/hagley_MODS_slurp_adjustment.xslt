@@ -1,12 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Basic MODS -->
 <xsl:stylesheet version="1.0"
-  xmlns:java="http://xml.apache.org/xalan/java"
   xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-  xmlns:foxml="info:fedora/fedora-system:def/foxml#"
   xmlns:mods="http://www.loc.gov/mods/v3"
-  xmlns:xlink="http://www.w3.org/1999/xlink"
-     exclude-result-prefixes="mods java">
+     exclude-result-prefixes="mods">
 
   <!-- Eliminate excessive specificity with root name elements. -->
   <xsl:template match="mods:mods/mods:name[mods:role/mods:roleTerm]" mode="slurping_MODS">
