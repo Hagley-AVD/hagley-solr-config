@@ -155,7 +155,7 @@
   <!-- Intercept names with role terms, so we can create copies of the fields
     including the role term in the name of generated fields. (Hurray, additional
     specificity!) -->
-  <xsl:template match="mods:name[mods:role/mods:roleTerm]" mode="slurping_MODS">
+  <xsl:template match="mods:name[mods:role/mods:roleTerm][not(parent::mods:mods)]" mode="slurping_MODS">
     <xsl:param name="prefix"/>
     <xsl:param name="suffix"/>
     <xsl:param name="pid">not provided</xsl:param>
