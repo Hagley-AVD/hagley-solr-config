@@ -22,22 +22,30 @@
     <xsl:for-each select="mods:role/mods:roleTerm">
       <xsl:variable name="this_prefix" select="concat($base_prefix, translate(normalize-space(.), $uppercase, $lowercase), '_')"/>
 
-      <xsl:call-template name="general_mods_field">
+      <xsl:apply-templates select="../../mods:namePart" mode="hagley_slurp_mods_name">
         <xsl:with-param name="prefix" select="$this_prefix"/>
         <xsl:with-param name="suffix" select="$suffix"/>
-        <xsl:with-param name="value" select="normalize-space(text())"/>
-        <xsl:with-param name="pid" select="$pid"/>
-        <xsl:with-param name="datastream" select="$datastream"/>
-        <xsl:with-param name="node" select="../.."/>
-      </xsl:call-template>
+      </xsl:apply-templates>
     </xsl:for-each>
-
-    <xsl:call-template name="general_mods_field">
-      <xsl:with-param name="prefix" select="$base_prefix"/>
-      <xsl:with-param name="suffix" select="$suffix"/>
-      <xsl:with-param name="value" select="normalize-space(text())"/>
-      <xsl:with-param name="pid" select="$pid"/>
-      <xsl:with-param name="datastream" select="$datastream"/>
-    </xsl:call-template>
   </xsl:template>
+
+  <xsl:template match="mods:namePart" mode="hagley_slurp_mods_name">
+    <xsl:param name="prefix"/>
+    <xsl:param name="suffix"/>
+
+
+    <xsl:variable name="value" select="normalize-space(.)"/>
+    <xsl:if test="$value">
+      <field>
+        <xsl:attribute name="name">
+          <xsl:value-of select="$prefix"/>
+          <xsl:value-of select="local-name()"/>
+          <xsl:text>_</xsl:text>
+          <xsl:value-of select="$suffix"/>
+        </xsl:attribute>
+        <xsl:value-of select="$value"/>
+      </field>
+    </xsl:if>
+  </xsl:template>
+
 </xsl:stylesheet>
