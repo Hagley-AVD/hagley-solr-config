@@ -11,6 +11,8 @@
   <xsl:include href="/usr/local/fedora/tomcat/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/index/FgsIndex/islandora_transforms/library/xslt-date-template.xslt"/>
   <!-- <xsl:include href="/usr/local/fedora/tomcat/webapps/fedoragsearch/WEB-INF/classes/config/index/FgsIndex/islandora_transforms/manuscript_finding_aid.xslt"/> -->
   <xsl:include href="/usr/local/fedora/tomcat/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/index/FgsIndex/islandora_transforms/manuscript_finding_aid.xslt"/>
+  <xsl:include href="/usr/local/fedora/tomcat/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/index/FgsIndex/islandora_transforms/hagley_MODS_slurp_adjustment.xslt"/>
+
   <!-- HashSet to track single-valued fields. -->
   <xsl:variable name="single_valued_hashset" select="java:java.util.HashSet.new()"/>
 
@@ -153,7 +155,7 @@
   <!-- Intercept names with role terms, so we can create copies of the fields
     including the role term in the name of generated fields. (Hurray, additional
     specificity!) -->
-  <xsl:template match="mods:name[mods:role/mods:roleTerm]" mode="slurping_MODS">
+  <xsl:template match="mods:name[mods:role/mods:roleTerm][not(parent::mods:mods)]" mode="slurping_MODS">
     <xsl:param name="prefix"/>
     <xsl:param name="suffix"/>
     <xsl:param name="pid">not provided</xsl:param>
