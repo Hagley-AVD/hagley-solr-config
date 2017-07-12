@@ -266,7 +266,14 @@
          them will be ignored outright
      -->
     <fieldtype name="ignored" stored="false" indexed="false" class="solr.StrField" />
-
+    
+    <!-- hagley customizations for oral histories -->
+    <fieldType name="semicolonDelimited" class="solr.TextField">
+      <analyzer>
+        <tokenizer class="solr.PatternTokenizerFactory" pattern="; "/>
+      </analyzer>
+    </fieldType>
+    
      <!-- PID needs a new tokenized type for the PID that does no tokenizing.-->
     <fieldType name="text_keyword" class="solr.TextField">
       <analyzer>
@@ -336,6 +343,12 @@
    <dynamicField name="*_mdt" type="date"    indexed="true"  stored="true" multiValued="true"/>
    <dynamicField name="*_et" type="edgedText" indexed="true" stored="true" multiValued="true"/>
    <dynamicField name="*_mlt" type="mappedLowerText" indexed="true" stored="true" multiValued='false'/>
+   
+   <!-- hagley customizations oralhistory fields -->
+   <dynamicField name="or_*" type="text" indexed="true" stored="true" multiValued="true"/>
+   <field name="or_keywords" type="text" indexed="true" stored="true" multiValued="true"/>
+   <field name="oh_keyword" type="semicolonDelimited" indexed="true" stored="true" multiValued="true"/>
+   <copyField source="or_keywords" dest="oh_keyword"/>
 
    <!-- uncomment the following to ignore any fields that don't already match an existing
         field name or dynamic field, rather than reporting them as an error.
