@@ -268,7 +268,7 @@
     <fieldtype name="ignored" stored="false" indexed="false" class="solr.StrField" />
     
     <!-- hagley customizations for oral histories -->
-    <fieldType name="semicolonDelimited" class="solr.TextField">
+    <fieldType name="semicolonDelimitedText" class="solr.TextField">
       <analyzer>
         <tokenizer class="solr.PatternTokenizerFactory" pattern="; "/>
       </analyzer>
@@ -345,10 +345,11 @@
    <dynamicField name="*_mlt" type="mappedLowerText" indexed="true" stored="true" multiValued='false'/>
    
    <!-- hagley customizations oralhistory fields -->
+   <dynamicField name="*_scdt"  type="semicolonDelimitedText" indexed="true"  stored="true" multiValued="true"/>
    <dynamicField name="or_*" type="text" indexed="true" stored="true" multiValued="true"/>
    <field name="or_keywords" type="text" indexed="true" stored="true" multiValued="true"/>
-   <field name="oh_keyword" type="semicolonDelimited" indexed="true" stored="true" multiValued="true"/>
-   <copyField source="or_keywords" dest="oh_keyword"/>
+   <field name="or_keywords_scdt" type="semicolonDelimitedText" indexed="true" stored="true" multiValued="true"/>
+   <copyField source="or_keywords" dest="or_keywords_scdt"/>
 
    <!-- uncomment the following to ignore any fields that don't already match an existing
         field name or dynamic field, rather than reporting them as an error.
