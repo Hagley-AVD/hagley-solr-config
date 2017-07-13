@@ -5,7 +5,7 @@
      exclude-result-prefixes="mods">
 
   <!-- Eliminate excessive specificity with root name elements. -->
-  <xsl:template match="mods:mods/mods:name[mods:role/mods:roleTerm[@type="code"]]" mode="slurping_MODS">
+  <xsl:template match="mods:mods/mods:name[mods:role/mods:roleTerm[@type='code']]" mode="slurping_MODS">
     <xsl:param name="prefix"/>
     <xsl:param name="suffix"/>
     <xsl:param name="pid">not provided</xsl:param>
